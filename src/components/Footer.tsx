@@ -1,4 +1,4 @@
-const Footer = () => {
+export const Footer = () => {
   return (
     <footer className="bg-slate-200 shadow-sm flex justify-between items-center px-10">
       {/* make copyright with icon*/}
@@ -7,5 +7,3 @@ const Footer = () => {
     </footer>
   );
 };
-
-export default Footer;
