@@ -16,9 +16,16 @@
     },
     {
       "id": 3,
-      "name": "Green t-shirt",
+      "name": "Blue t-shirt",
       "price": 100000,
-      "stock": 0,
+      "stock": 4,
+      "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/3707cd40-34db-4c21-9047-56a62d48abf4.jpg.webp?ect=4g"
+    },
+    {
+      "id": 4,
+      "name": "Red t-shirt",
+      "price": 100000,
+      "stock": 1,
       "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/3707cd40-34db-4c21-9047-56a62d48abf4.jpg.webp?ect=4g"
     }
   ]

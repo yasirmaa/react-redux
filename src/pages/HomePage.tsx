@@ -1,4 +1,5 @@
 import { ProductCard } from '@/components/ProductCard';
+import { ProductSkeleton } from '@/components/skeleton';
 import { axiosInstance } from '@/lib/axios';
 import { useEffect, useState } from 'react';
 
@@ -12,7 +13,7 @@ type Product = {
 
 const HomePage = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   const ProductList = products.map((product) => (
     <ProductCard
@@ -26,7 +27,7 @@ const HomePage = () => {
   ));
 
   const fetchProducts = async () => {
-    setLoading(true);
+    setIsLoading(true);
     try {
       const response = await axiosInstance.get('/products');
       console.log(response.data);
@@ -35,7 +36,7 @@ const HomePage = () => {
     } catch (error) {
       console.error(error);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -45,8 +46,8 @@ const HomePage = () => {
 
   return (
     <>
-      <main className="min-h-[80vh] max-w-screen-md mx-auto px-4 mt-8">
-        <div className="pb-20 mx-auto text-center flex flex-col items-center max-w-3xl">
+      <main className="min-h-[80vh] max-w-screen-lg mx-auto px-4 my-8">
+        <div className="pb-20 mx-auto text-center flex flex-col items-center max-w-4xl">
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
             Become a trend-setter with us
           </h1>
@@ -56,7 +57,18 @@ const HomePage = () => {
           </p>
         </div>
 
-        {loading ? <p>Loading...</p> : <div className="grid grid-cols-2 gap-4">{ProductList}</div>}
+        <div className="grid grid-cols-4 gap-3">
+          {isLoading ? (
+            <>
+              <ProductSkeleton />
+              <ProductSkeleton />
+              <ProductSkeleton />
+              <ProductSkeleton />
+            </>
+          ) : (
+            <>{ProductList}</>
+          )}
+        </div>
       </main>
     </>
   );

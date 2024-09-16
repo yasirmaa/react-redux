@@ -33,7 +33,7 @@ export const ProductCard = ({
   const addToCart = () => {};
 
   return (
-    <div className="p-4 border rounded-md md:max-w-96 flex flex-col gap-4">
+    <div className="p-4 border rounded-md md:max-w-80 flex flex-col gap-4">
       <Link to={'/product/' + id} className="aspect-square w-full overflow-hidden">
         <img className="w-full" src={imageUrl} alt="Product" />
       </Link>
