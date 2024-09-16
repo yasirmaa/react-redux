@@ -1,23 +1,48 @@
 import { ProductCard } from '@/components/ProductCard';
+import { axiosInstance } from '@/lib/axios';
+import { useEffect, useState } from 'react';
 
-const ProductRaw = [
-  {
-    name: 'Dark blue t-shirt',
-    price: 120000,
-    stock: 5,
-    imageUrl:
-      'https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/1c3f8ae1-46d3-4429-8aaf-f99b9dde923f.jpg.webp?ect=4g',
-  },
-  {
-    name: 'Green t-shirt',
-    price: 120000,
-    stock: 0,
-    imageUrl:
-      'https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/3707cd40-34db-4c21-9047-56a62d48abf4.jpg.webp?ect=4g',
-  },
-];
+type Product = {
+  id: number;
+  name: string;
+  price: number;
+  stock: number;
+  imageUrl: string;
+};
 
 const HomePage = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const ProductList = products.map((product) => (
+    <ProductCard
+      key={product.id}
+      id={product.id}
+      name={product.name}
+      price={product.price}
+      stock={product.stock}
+      imageUrl={product.imageUrl}
+    />
+  ));
+
+  const fetchProducts = async () => {
+    setLoading(true);
+    try {
+      const response = await axiosInstance.get('/products');
+      console.log(response.data);
+
+      setProducts(response.data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
   return (
     <>
       <main className="min-h-[80vh] max-w-screen-md mx-auto px-4 mt-8">
@@ -31,17 +56,7 @@ const HomePage = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
-          {ProductRaw.map((product) => (
-            <ProductCard
-              key={product.name}
-              name={product.name}
-              price={product.price}
-              stock={product.stock}
-              imageUrl={product.imageUrl}
-            />
-          ))}
-        </div>
+        {loading ? <p>Loading...</p> : <div className="grid grid-cols-2 gap-4">{ProductList}</div>}
       </main>
     </>
   );

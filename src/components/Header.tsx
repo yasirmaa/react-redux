@@ -7,7 +7,9 @@ import { Link } from 'react-router-dom';
 export const Header = () => {
   return (
     <header className="sticky w-full border-b shadow-sm py-5 px-10 flex items-center justify-between ">
-      <p className="text-2xl font-bold">Yamadux</p>
+      <Link to={'/'}>
+        <p className="text-2xl font-bold">Yamadux</p>
+      </Link>
 
       <Input className="max-w-[600px]" placeholder="Search products..." />
 

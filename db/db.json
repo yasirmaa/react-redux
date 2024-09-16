@@ -1,0 +1,25 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Dark blue t-shirt",
+      "price": 120000,
+      "stock": 5,
+      "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/1c3f8ae1-46d3-4429-8aaf-f99b9dde923f.jpg.webp?ect=4g"
+    },
+    {
+      "id": 2,
+      "name": "Green blue t-shirt",
+      "price": 100000,
+      "stock": 0,
+      "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/3707cd40-34db-4c21-9047-56a62d48abf4.jpg.webp?ect=4g"
+    },
+    {
+      "id": 3,
+      "name": "Green t-shirt",
+      "price": 100000,
+      "stock": 0,
+      "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/3707cd40-34db-4c21-9047-56a62d48abf4.jpg.webp?ect=4g"
+    }
+  ]
+}
