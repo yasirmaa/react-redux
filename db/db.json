@@ -27,6 +27,139 @@
       "price": 100000,
       "stock": 1,
       "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/3707cd40-34db-4c21-9047-56a62d48abf4.jpg.webp?ect=4g"
+    },
+    {
+      "id": 5,
+      "name": "Yellow t-shirt",
+      "price": 95000,
+      "stock": 3,
+      "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/123.jpg.webp?ect=4g"
+    },
+    {
+      "id": 6,
+      "name": "Orange t-shirt",
+      "price": 90000,
+      "stock": 2,
+      "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/124.jpg.webp?ect=4g"
+    },
+    {
+      "id": 7,
+      "name": "Pink t-shirt",
+      "price": 85000,
+      "stock": 6,
+      "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/125.jpg.webp?ect=4g"
+    },
+    {
+      "id": 8,
+      "name": "Purple t-shirt",
+      "price": 88000,
+      "stock": 4,
+      "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/126.jpg.webp?ect=4g"
+    },
+    {
+      "id": 9,
+      "name": "Gray t-shirt",
+      "price": 95000,
+      "stock": 7,
+      "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/127.jpg.webp?ect=4g"
+    },
+    {
+      "id": 10,
+      "name": "White t-shirt",
+      "price": 110000,
+      "stock": 8,
+      "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/128.jpg.webp?ect=4g"
+    },
+    {
+      "id": 11,
+      "name": "Black t-shirt",
+      "price": 120000,
+      "stock": 10,
+      "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/129.jpg.webp?ect=4g"
+    },
+    {
+      "id": 12,
+      "name": "Maroon t-shirt",
+      "price": 95000,
+      "stock": 5,
+      "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/130.jpg.webp?ect=4g"
+    },
+    {
+      "id": 13,
+      "name": "Beige t-shirt",
+      "price": 100000,
+      "stock": 9,
+      "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/131.jpg.webp?ect=4g"
+    },
+    {
+      "id": 14,
+      "name": "Olive t-shirt",
+      "price": 105000,
+      "stock": 3,
+      "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/132.jpg.webp?ect=4g"
+    },
+    {
+      "id": 15,
+      "name": "Navy t-shirt",
+      "price": 120000,
+      "stock": 2,
+      "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/133.jpg.webp?ect=4g"
+    },
+    {
+      "id": 16,
+      "name": "Teal t-shirt",
+      "price": 90000,
+      "stock": 4,
+      "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/134.jpg.webp?ect=4g"
+    },
+    {
+      "id": 17,
+      "name": "Light blue t-shirt",
+      "price": 92000,
+      "stock": 6,
+      "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/135.jpg.webp?ect=4g"
+    },
+    {
+      "id": 18,
+      "name": "Light gray t-shirt",
+      "price": 97000,
+      "stock": 5,
+      "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/136.jpg.webp?ect=4g"
+    },
+    {
+      "id": 19,
+      "name": "Burgundy t-shirt",
+      "price": 115000,
+      "stock": 4,
+      "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/137.jpg.webp?ect=4g"
+    },
+    {
+      "id": 20,
+      "name": "Cream t-shirt",
+      "price": 98000,
+      "stock": 5,
+      "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/138.jpg.webp?ect=4g"
+    },
+    {
+      "id": 21,
+      "name": "Coral t-shirt",
+      "price": 102000,
+      "stock": 7,
+      "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/139.jpg.webp?ect=4g"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "email": "admin@gmail.com",
+      "password": "admin123",
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "email": "user@gmail.com",
+      "password": "user1234",
+      "role": "user"
     }
   ]
 }

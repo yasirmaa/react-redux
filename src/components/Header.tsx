@@ -3,8 +3,19 @@ import { Button } from './ui/button';
 import { IoCart, IoHeart } from 'react-icons/io5';
 import { Separator } from './ui/separator';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
 
 export const Header = () => {
+  const userSelector = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    localStorage.removeItem('user-token');
+    dispatch({
+      type: 'USER_LOGOUT',
+    });
+  };
   return (
     <header className="sticky w-full border-b shadow-sm py-5 px-10 flex items-center justify-between ">
       <Link to={'/'}>
@@ -24,12 +35,23 @@ export const Header = () => {
         </div>
         <Separator className="h-full" orientation="vertical" />
         <div className="flex items-center gap-x-2">
-          <Link to={'/login'}>
-            <Button>Sign in</Button>
-          </Link>
-          <Link to={'/signup'}>
-            <Button variant={'outline'}>Sign up</Button>
-          </Link>
+          {userSelector.id ? (
+            <>
+              <p>Halo{userSelector.email}</p>
+              <Button onClick={handleLogout} variant={'destructive'}>
+                Logout
+              </Button>
+            </>
+          ) : (
+            <>
+              <Link to={'/login'}>
+                <Button>Sign in</Button>
+              </Link>
+              <Link to={'/signup'}>
+                <Button variant={'outline'}>Sign up</Button>
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </header>

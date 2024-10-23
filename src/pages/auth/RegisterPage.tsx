@@ -16,33 +16,31 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { axiosInstance } from '@/lib/axios';
-import { useDispatch } from 'react-redux';
 import { GuestPage } from '@/components/guard/GuestPage';
 
-type LoginForm = {
+type RegisterForm = {
   email: string;
   password: string;
 };
 
-const loginFromSchema = z.object({
+const RegisterFromSchema = z.object({
   email: z.string().email('Invalid email format'),
   password: z.string().min(8, 'Password must be at least 8 characters long'),
 });
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const form = useForm({
     defaultValues: {
       email: '',
       password: '',
     },
-    resolver: zodResolver(loginFromSchema),
+    resolver: zodResolver(RegisterFromSchema),
     reValidateMode: 'onChange',
   });
 
   const [showPassword, setShowPassword] = useState(false);
-  const dispatch = useDispatch();
 
-  const handleLogin = async (values: LoginForm) => {
+  const handleRegister = async (values: RegisterForm) => {
     const response = await axiosInstance.get('/users', {
       params: {
         email: values.email,
@@ -53,15 +51,8 @@ const LoginPage = () => {
       alert('Invalid email or password');
       return;
     }
-    alert('Login success');
+    alert('Register success');
 
-    dispatch({
-      type: 'USER_LOGIN',
-      payload: {
-        id: response.data[0].id,
-        email: response.data[0].email,
-      },
-    });
     form.reset();
     window.localStorage.setItem('user-token', response.data[0].id);
   };
@@ -70,7 +61,7 @@ const LoginPage = () => {
     <GuestPage>
       <main className="px-4 container py-8 flex flex-col mx-auto justify-center items-center max-w-screen-md h-[80vh]">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(handleLogin)} className="w-full max-w-[540px]">
+          <form onSubmit={form.handleSubmit(handleRegister)} className="w-full max-w-[540px]">
             <Card>
               <CardHeader>
                 <CardTitle>Welcome back!</CardTitle>
@@ -130,4 +121,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
