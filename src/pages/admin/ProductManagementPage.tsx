@@ -76,7 +76,7 @@ const ProductManagementPage = () => {
 
   return (
     <AdminLayout title="Product Management" description="Manage your products">
-      <div className="flex max-w-screen-sm mb-3">
+      <div className="flex max-w-screen-sm mb-3 gap-2">
         <Input onChange={(e) => setSearchProduct(e.target.value)} placeholder="Seacrh..." />
         <Button onClick={handleSearchProduct}>Seach</Button>
       </div>

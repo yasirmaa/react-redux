@@ -1,7 +1,7 @@
 import { ProductCard } from '@/components/ProductCard';
-import { ProductSkeleton } from '@/components/skeleton';
 import { axiosInstance } from '@/lib/axios';
 import { useEffect, useState } from 'react';
+import { ProductSkeleton } from '@/components/skeleton';
 
 type Product = {
   id: number;
@@ -52,7 +52,7 @@ const HomePage = () => {
             Become a trend-setter with us
           </h1>
           <p className="mt-6 text-lg max-w-prose text-muted-foreground">
-            FastCampus provides you with the finest clothings and ensure your confidence throughtout
+            Yamastore provides you with the finest clothings and ensure your confidence throughtout
             your days.
           </p>
         </div>

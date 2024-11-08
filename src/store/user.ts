@@ -1,10 +1,12 @@
 const DEFAULT_USER = {
   id: '',
+  username: '',
   email: '',
 };
 
 interface UserPayload {
   id: string;
+  username: string;
   email: string;
 }
 
@@ -18,6 +20,7 @@ export const userReducer = (state = DEFAULT_USER, action: UserAction) => {
     const dupState = { ...state };
 
     dupState.id = action.payload.id;
+    dupState.username = action.payload.username;
     dupState.email = action.payload.email;
 
     return dupState;

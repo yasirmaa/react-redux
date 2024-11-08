@@ -59,6 +59,7 @@ const LoginPage = () => {
       type: 'USER_LOGIN',
       payload: {
         id: response.data[0].id,
+        username: response.data[0].username,
         email: response.data[0].email,
       },
     });

@@ -39,7 +39,7 @@ export const ProductCard = ({
       </Link>
 
       <Link to={'/product/' + id}>
-        <p>{name}</p>
+        <p className="truncate">{name}</p>
         <p className="text-xl font-semibold">Rp {price.toLocaleString('id-ID')}</p>
         <p className="text-muted-foreground text-sm">In stock: {stock}</p>
       </Link>

@@ -19,7 +19,7 @@ export const Header = () => {
   return (
     <header className="sticky w-full border-b shadow-sm py-5 px-10 flex items-center justify-between ">
       <Link to={'/'}>
-        <p className="text-2xl font-bold">Yamadux</p>
+        <p className="text-2xl font-bold">Yamastore</p>
       </Link>
 
       <Input className="max-w-[600px]" placeholder="Search products..." />
@@ -37,7 +37,7 @@ export const Header = () => {
         <div className="flex items-center gap-x-2">
           {userSelector.id ? (
             <>
-              <p>Halo{userSelector.email}</p>
+              <p>Halo {userSelector.username}</p>
               <Button onClick={handleLogout} variant={'destructive'}>
                 Logout
               </Button>
