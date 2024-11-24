@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from '../ui/button';
 import { IoAdd, IoCart, IoPerson, IoPricetag } from 'react-icons/io5';
+import { Link } from 'react-router-dom';
 
 type AdminLayoutProps = {
   children: React.ReactNode;
@@ -16,10 +17,12 @@ export const AdminLayout = ({ children, title, description }: AdminLayoutProps) 
           <h1 className="font-semibold text-3xl">Admin Dashboard</h1>
         </div>
         <div className="flex flex-col space-y-0 py-4">
-          <SidebarItem>
-            <IoPricetag className="mr-2 h-6 w-6" />
-            Products Management
-          </SidebarItem>
+          <Link to={'/admin/products'}>
+            <SidebarItem>
+              <IoPricetag className="mr-2 h-6 w-6" />
+              Products Management
+            </SidebarItem>
+          </Link>
           <SidebarItem>
             <IoCart className="mr-2 h-6 w-6" />
             Orders Management
@@ -40,11 +43,14 @@ export const AdminLayout = ({ children, title, description }: AdminLayoutProps) 
               <h1 className="font-bold tetx-4xl">{title}</h1>
               <p className="text-muted-foreground">{description}</p>
             </div>
-
-            <Button>
-              <IoAdd className="h-6 w-6 mr-2" />
-              Add Product
-            </Button>
+            {window.location.pathname === '/admin/products' && (
+              <a href="/admin/products/create">
+                <Button>
+                  <IoAdd className="h-6 w-6 mr-2" />
+                  Add Product
+                </Button>
+              </a>
+            )}
           </div>
 
           {children}

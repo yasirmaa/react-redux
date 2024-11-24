@@ -11,9 +11,9 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { axiosInstance } from '@/lib/axios';
-import { ChevronLeft, ChevronRight, Ellipsis } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Edit, Trash } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 type Product = {
   id: string;
@@ -61,6 +61,22 @@ const ProductManagementPage = () => {
     setUseSearchParams(searchParams);
   };
 
+  const handleDeleteProduct = async (id: string) => {
+    const shouldDelete = confirm('Are you sure you want to delete this product?');
+
+    if (!shouldDelete) {
+      return;
+    }
+
+    try {
+      await axiosInstance.delete(`/products/${id}`);
+      alert('Product deleted');
+      fetchProducts();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     if (!searchParams.get('page')) {
       searchParams.set('page', '1');
@@ -98,9 +114,20 @@ const ProductManagementPage = () => {
               <TableCell>Rp {product.price.toLocaleString('id-ID')}</TableCell>
               <TableCell>{product.stock}</TableCell>
               <TableCell>
-                <Button variant={'ghost'} size={'icon'}>
-                  <Ellipsis className="w-6 h-6" />
-                </Button>
+                <div className="flex gap-4">
+                  <Link to={'/admin/products/edit/' + product.id}>
+                    <Button variant={'ghost'} size={'icon'}>
+                      <Edit className="w-6 h-6" />
+                    </Button>
+                  </Link>
+                  <Button
+                    onClick={() => handleDeleteProduct(product.id)}
+                    variant={'destructive'}
+                    size={'icon'}
+                  >
+                    <Trash className="w-6 h-6" />
+                  </Button>
+                </div>
               </TableCell>
             </TableRow>
           ))}

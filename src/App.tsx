@@ -1,17 +1,20 @@
-import CartPage from './pages/CartPage';
-import HomePage from './pages/HomePage';
-import { Routes, Route, useLocation } from 'react-router-dom';
-import NotFoundPage from './pages/NotFoundPage';
-import LoginPage from './pages/auth/LoginPage';
-import { Header } from './components/Header';
-import { Footer } from './components/Footer';
-import ProductDetailpage from './pages/ProductDetailPage';
-import { axiosInstance } from './lib/axios';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { Commet } from 'react-loading-indicators';
+
+import CartPage from './pages/CartPage';
+import HomePage from './pages/HomePage';
+import NotFoundPage from './pages/NotFoundPage';
+import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
+import ProductDetailPage from './pages/ProductDetailPage';
 import ProductManagementPage from './pages/admin/ProductManagementPage';
+import CreateProductPage from './pages/admin/CreateProductPage';
+import EditProductPage from './pages/admin/EditProductPage';
+import { Header } from './components/Header';
+import { Footer } from './components/Footer';
+import { axiosInstance } from './lib/axios';
 
 function App() {
   const location = useLocation();
@@ -24,7 +27,6 @@ function App() {
       if (!currentUser) return;
 
       const userResponse = await axiosInstance.get(`/users/${currentUser}`);
-
       dispatch({
         type: 'USER_LOGIN',
         payload: {
@@ -33,7 +35,7 @@ function App() {
         },
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setIsHydrated(true);
     }
@@ -50,19 +52,32 @@ function App() {
       </div>
     );
   }
+
+  const isAdminPage = location.pathname.startsWith('/admin');
+
   return (
     <>
-      {!location.pathname.includes('/admin') && <Header />}
+      {!isAdminPage && <Header />}
       <Routes>
+        {/* Public Routes */}
         <Route path="/" element={<HomePage />} />
         <Route path="/cart" element={<CartPage />} />
-        <Route path="/product/:productId" Component={ProductDetailpage} />
-        <Route path="/login" Component={LoginPage} />
-        <Route path="/signup" Component={RegisterPage} />
-        <Route path="/admin/products" element={<ProductManagementPage />} />
+        <Route path="/product/:productId" element={<ProductDetailPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<RegisterPage />} />
+
+        {/* Admin Routes */}
+        <Route path="/admin">
+          <Route index element={<ProductManagementPage />} />
+          <Route path="products" element={<ProductManagementPage />} />
+          <Route path="products/create" element={<CreateProductPage />} />
+          <Route path="products/edit/:productId" element={<EditProductPage />} />
+        </Route>
+
+        {/* Fallback Route */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-      {!location.pathname.includes('/admin') && <Footer />}
+      {!isAdminPage && <Footer />}
     </>
   );
 }

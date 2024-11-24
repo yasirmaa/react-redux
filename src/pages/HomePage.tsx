@@ -1,7 +1,7 @@
 import { ProductCard } from '@/components/ProductCard';
+import { ProductSkeleton } from '@/components/Skeleton';
 import { axiosInstance } from '@/lib/axios';
 import { useEffect, useState } from 'react';
-import { ProductSkeleton } from '@/components/skeleton';
 
 type Product = {
   id: number;
