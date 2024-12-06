@@ -1,13 +1,6 @@
 {
   "products": [
     {
-      "id": "1",
-      "name": "Navy t-shirt edited",
-      "price": 120000,
-      "stock": 5,
-      "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/1c3f8ae1-46d3-4429-8aaf-f99b9dde923f.jpg.webp?ect=4g"
-    },
-    {
       "id": "2",
       "name": "Turquoise green t-shirt",
       "price": 100000,
@@ -22,13 +15,6 @@
       "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/9e4bb3df-888d-4b7b-83b6-0cf1fae471f2.jpg.webp?ect=4g"
     },
     {
-      "id": "4",
-      "name": "Red t-shirt",
-      "price": 100000,
-      "stock": 1,
-      "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/55bae54a-a0bc-42fb-b370-85f3f8ed0f7c.jpg.webp?ect=4g"
-    },
-    {
       "id": "5",
       "name": "ETERNALWORKS ROCKY FIELD JACKET GREEN",
       "price": 275000,
@@ -36,32 +22,11 @@
       "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2022/7/27/868b9b67-c81c-46a6-8a41-3b03148afb45.jpg.webp?ect=4g"
     },
     {
-      "id": "6",
-      "name": "Bomber Polos Navy",
-      "price": 190000,
-      "stock": 2,
-      "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2022/3/5/1616e881-5770-4acb-9fa7-a71cac40b85b.jpg.webp?ect=4g"
-    },
-    {
       "id": "7",
       "name": "Bomber Polos Army",
       "price": 185000,
       "stock": 6,
       "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2022/4/7/eac666cd-3a18-4512-aa45-b0ecd41bba88.jpg.webp?ect=4g"
-    },
-    {
-      "id": "8",
-      "name": "Jaket Pria PUMA ESS",
-      "price": 388000,
-      "stock": 4,
-      "imageUrl": "https://images.tokopedia.net/img/cache/500-square/hDjmkQ/2024/1/15/2680cf1d-b8ec-4651-9887-6ce2acde6078.png.webp?ect=4g"
-    },
-    {
-      "id": "9",
-      "name": "Gray t-shirt",
-      "price": 95000,
-      "stock": 7,
-      "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/127.jpg.webp?ect=4g"
     },
     {
       "id": "10",
@@ -134,13 +99,6 @@
       "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/137.jpg.webp?ect=4g"
     },
     {
-      "id": "20",
-      "name": "Cream t-shirt",
-      "price": 98000,
-      "stock": 5,
-      "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/138.jpg.webp?ect=4g"
-    },
-    {
       "id": "21",
       "name": "Coral t-shirt",
       "price": 102000,
@@ -166,13 +124,6 @@
       "name": "Redmi Note 10",
       "price": 1000000,
       "stock": 2,
-      "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/138.jpg.webp?ect=4g"
-    },
-    {
-      "id": "1a57",
-      "name": "Redmi Note 10 Baru edited",
-      "price": 20000000,
-      "stock": 7,
       "imageUrl": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2024/5/16/138.jpg.webp?ect=4g"
     }
   ],

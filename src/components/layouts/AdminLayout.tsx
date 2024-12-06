@@ -1,15 +1,16 @@
 import React from 'react';
 import { Button } from '../ui/button';
-import { IoAdd, IoCart, IoPerson, IoPricetag } from 'react-icons/io5';
+import { IoCart, IoPerson, IoPricetag } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 
 type AdminLayoutProps = {
   children: React.ReactNode;
   title: string;
   description: string;
+  rightSection?: React.ReactNode;
 };
 
-export const AdminLayout = ({ children, title, description }: AdminLayoutProps) => {
+export const AdminLayout = ({ children, title, description, rightSection }: AdminLayoutProps) => {
   return (
     <div className="flex">
       <aside className="w-72 border-r h-screen ">
@@ -17,7 +18,7 @@ export const AdminLayout = ({ children, title, description }: AdminLayoutProps) 
           <h1 className="font-semibold text-3xl">Admin Dashboard</h1>
         </div>
         <div className="flex flex-col space-y-0 py-4">
-          <Link to={'/admin/products'}>
+          <Link to={'/admin/products?page=1'}>
             <SidebarItem>
               <IoPricetag className="mr-2 h-6 w-6" />
               Products Management
@@ -43,14 +44,7 @@ export const AdminLayout = ({ children, title, description }: AdminLayoutProps) 
               <h1 className="font-bold tetx-4xl">{title}</h1>
               <p className="text-muted-foreground">{description}</p>
             </div>
-            {window.location.pathname === '/admin/products' && (
-              <a href="/admin/products/create">
-                <Button>
-                  <IoAdd className="h-6 w-6 mr-2" />
-                  Add Product
-                </Button>
-              </a>
-            )}
+            {window.location.pathname === '/admin/products' && rightSection}
           </div>
 
           {children}
