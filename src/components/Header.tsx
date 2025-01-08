@@ -10,6 +10,8 @@ export const Header = () => {
   const userSelector = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
 
+  console.log(userSelector);
+
   const handleLogout = () => {
     localStorage.removeItem('user-token');
     dispatch({

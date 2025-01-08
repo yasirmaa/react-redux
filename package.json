@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "server": "npx json-server --watch db/db.json --port 3000",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
@@ -15,6 +16,7 @@
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
+    "@reduxjs/toolkit": "^2.5.0",
     "axios": "^1.7.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
