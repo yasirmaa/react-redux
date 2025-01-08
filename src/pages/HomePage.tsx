@@ -30,7 +30,6 @@ const HomePage = () => {
     setIsLoading(true);
     try {
       const response = await axiosInstance.get('/products');
-      console.log(response.data);
 
       setProducts(response.data);
     } catch (error) {

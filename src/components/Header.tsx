@@ -3,21 +3,18 @@ import { Button } from './ui/button';
 import { IoCart, IoHeart } from 'react-icons/io5';
 import { Separator } from './ui/separator';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/store/store';
+import { useAppDispatch, useAppSelector } from '@/store/hooksStore';
+import { logout } from '@/store/userSlice';
 
 export const Header = () => {
-  const userSelector = useSelector((state: RootState) => state.user);
-  const dispatch = useDispatch();
-
-  console.log(userSelector);
+  const user = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
 
   const handleLogout = () => {
     localStorage.removeItem('user-token');
-    dispatch({
-      type: 'USER_LOGOUT',
-    });
+    dispatch(logout());
   };
+
   return (
     <header className="sticky w-full border-b shadow-sm py-5 px-10 flex items-center justify-between ">
       <Link to={'/'}>
@@ -28,18 +25,22 @@ export const Header = () => {
 
       <div className="flex items-center gap-x-4 h-10">
         <div className="flex items-center gap-x-2">
-          <Button variant={'ghost'} size={'icon'}>
-            <IoCart className="h-6 w-6" />
-          </Button>
-          <Button variant={'ghost'} size={'icon'}>
-            <IoHeart className="h-6 w-6" />
-          </Button>
+          <Link to={'/cart'}>
+            <Button variant={'ghost'} size={'icon'}>
+              <IoCart className="h-6 w-6" />
+            </Button>
+          </Link>
+          <Link to={'/wishlist'}>
+            <Button variant={'ghost'} size={'icon'}>
+              <IoHeart className="h-6 w-6" />
+            </Button>
+          </Link>
         </div>
         <Separator className="h-full" orientation="vertical" />
         <div className="flex items-center gap-x-2">
-          {userSelector.id ? (
+          {user.id ? (
             <>
-              <p>Halo {userSelector.username}</p>
+              <p>Halo {user.username}</p>
               <Button onClick={handleLogout} variant={'destructive'}>
                 Logout
               </Button>

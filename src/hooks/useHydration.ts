@@ -1,10 +1,11 @@
 import { axiosInstance } from '@/lib/axios';
+import { useAppDispatch } from '@/store/hooksStore';
+import { login } from '@/store/userSlice';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 
 export const useHydration = () => {
   const [isHydrated, setIsHydrated] = useState<boolean>(false);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const hydrateAuth = async () => {
     try {
@@ -13,15 +14,8 @@ export const useHydration = () => {
       if (!currentUser) return;
 
       const userResponse = await axiosInstance.get(`/users/${currentUser}`);
-      dispatch({
-        type: 'USER_LOGIN',
-        payload: {
-          id: userResponse.data.id,
-          email: userResponse.data.email,
-          username: userResponse.data.username,
-          role: userResponse.data.role,
-        },
-      });
+
+      dispatch(login(userResponse.data));
     } catch (error) {
       console.error(error);
     } finally {

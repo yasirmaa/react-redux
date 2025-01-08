@@ -16,7 +16,8 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { axiosInstance } from '@/lib/axios';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '@/store/hooksStore';
+import { login } from '@/store/userSlice';
 
 type LoginForm = {
   email: string;
@@ -39,7 +40,7 @@ const LoginPage = () => {
   });
 
   const [showPassword, setShowPassword] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleLogin = async (values: LoginForm) => {
     const response = await axiosInstance.get('/users', {
@@ -54,15 +55,7 @@ const LoginPage = () => {
     }
     alert('Login success');
 
-    dispatch({
-      type: 'USER_LOGIN',
-      payload: {
-        id: response.data[0].id,
-        username: response.data[0].username,
-        email: response.data[0].email,
-        role: response.data[0].role,
-      },
-    });
+    dispatch(login(response.data[0]));
     form.reset();
     window.localStorage.setItem('user-token', response.data[0].id);
   };

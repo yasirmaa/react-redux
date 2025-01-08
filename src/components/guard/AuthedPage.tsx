@@ -1,15 +1,13 @@
 import { RootState } from '@/store/store';
 import { useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 
-type AuthedPageProps = {
-  children: React.ReactNode;
-};
-
-export const AuthedPage = (props: AuthedPageProps) => {
+export const AuthedPage = () => {
   const userSelector = useSelector((state: RootState) => state.user);
+
   if (!userSelector.id) {
-    return <Navigate to={'/'} />;
+    return <Navigate to={'/login'} />;
   }
-  return <>{props.children}</>;
+
+  return <Outlet />;
 };
