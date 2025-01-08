@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 import { IoIosAdd, IoIosRemove } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 

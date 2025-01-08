@@ -1,5 +1,5 @@
-import { ProductCard } from '@/components/ProductCard';
-import { ProductSkeleton } from '@/components/Skeleton';
+import { ProductCard } from '@/components/organisms/ProductCard';
+import { ProductSkeleton } from '@/components/organisms/Skeleton';
 import { axiosInstance } from '@/lib/axios';
 import { useEffect, useState } from 'react';
 

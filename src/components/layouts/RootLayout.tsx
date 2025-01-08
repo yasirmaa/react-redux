@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { Header } from '../Header';
+import { Header } from '../organisms/Header';
 import { Commet } from 'react-loading-indicators';
 import { useHydration } from '@/hooks/useHydration';
 

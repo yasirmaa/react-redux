@@ -1,5 +1,5 @@
 import { IoIosAdd, IoIosRemove } from 'react-icons/io';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 import { IoCheckmark } from 'react-icons/io5';
 
 type Product = {

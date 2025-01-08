@@ -1,4 +1,4 @@
-import { DetailProductSkeleton } from '@/components/Skeleton';
+import { DetailProductSkeleton } from '@/components/organisms/Skeleton';
 import { Button } from '@/components/ui/button';
 import { axiosInstance } from '@/lib/axios';
 import { useEffect, useState } from 'react';

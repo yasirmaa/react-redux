@@ -1,7 +1,7 @@
-import { Input } from './ui/input';
-import { Button } from './ui/button';
+import { Input } from '../ui/input';
+import { Button } from '../ui/button';
 import { IoCart, IoHeart } from 'react-icons/io5';
-import { Separator } from './ui/separator';
+import { Separator } from '../ui/separator';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/store/hooksStore';
 import { logout } from '@/store/userSlice';
