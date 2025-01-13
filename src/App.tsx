@@ -12,6 +12,7 @@ import { AdminPage } from './components/guard/AdminPage';
 import ProductManagementPage from './pages/admin/ProductManagementPage';
 import CreateProductPage from './pages/admin/CreateProductPage';
 import EditProductPage from './pages/admin/EditProductPage';
+import LoadingPage from './pages/LoadingPage';
 
 const router = createBrowserRouter([
   {
@@ -81,7 +82,7 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
-  return <RouterProvider router={router}></RouterProvider>;
+  return <RouterProvider router={router} fallbackElement={<LoadingPage />}></RouterProvider>;
 };
 
 export default App;
