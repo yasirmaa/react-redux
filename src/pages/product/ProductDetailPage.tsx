@@ -69,7 +69,7 @@ const ProductDetailpage = () => {
 
               <p className="text-lg font-semibold">{quantity}</p>
 
-              <Button size={'icon'} variant={'ghost'}>
+              <Button size={'icon'} variant={'ghost'} onClick={() => setQuantity(quantity + 1)}>
                 <IoIosAdd className="h-6 w-6" />
               </Button>
             </div>

@@ -15,9 +15,9 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { axiosInstance } from '@/lib/axios';
 import { useAppDispatch } from '@/store/hooksStore';
-import { login } from '@/store/userSlice';
+import { loginUser } from '@/store/userSlice';
+import { useNavigate } from 'react-router-dom';
 
 type LoginForm = {
   email: string;
@@ -41,23 +41,16 @@ const LoginPage = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleLogin = async (values: LoginForm) => {
-    const response = await axiosInstance.get('/users', {
-      params: {
-        email: values.email,
-        password: values.password,
-      },
-    });
-    if (!response.data.length) {
-      alert('Invalid email or password');
-      return;
+    try {
+      await dispatch(loginUser(values)).unwrap();
+      alert('Login successful');
+      navigate('/');
+    } catch (error) {
+      alert(error || 'Login failed');
     }
-    alert('Login success');
-
-    dispatch(login(response.data[0]));
-    form.reset();
-    window.localStorage.setItem('user-token', response.data[0].id);
   };
 
   return (

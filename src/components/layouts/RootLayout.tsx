@@ -5,6 +5,7 @@ import { useHydration } from '@/hooks/useHydration';
 
 const RootLayout = () => {
   const { isHydrated } = useHydration();
+  console.log(isHydrated);
 
   if (!isHydrated) {
     return (

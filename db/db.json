@@ -141,6 +141,20 @@
       "email": "user@gmail.com",
       "password": "user1234",
       "role": "user"
+    },
+    {
+      "id": "9iEggii2x3pW3Gj-2NNWh",
+      "username": "yasir",
+      "email": "yasirmaarif26@gmail.com",
+      "password": "yasir123",
+      "role": "user"
+    },
+    {
+      "id": "MADzFqSCm2-5DVC-twrNP",
+      "username": "ayam",
+      "email": "ayam@gmail.com",
+      "password": "yasir123",
+      "role": "user"
     }
   ]
 }

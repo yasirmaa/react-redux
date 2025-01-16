@@ -10,50 +10,71 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { axiosInstance } from '@/lib/axios';
+import { registerUser } from '@/store/userSlice';
+import { useAppDispatch } from '@/store/hooksStore';
+import { useNavigate } from 'react-router-dom';
 
 type RegisterForm = {
+  username: string;
   email: string;
   password: string;
+  confirmPassword: string;
 };
 
-const RegisterFromSchema = z.object({
-  email: z.string().email('Invalid email format'),
-  password: z.string().min(8, 'Password must be at least 8 characters long'),
-});
+const RegisterFromSchema = z
+  .object({
+    username: z
+      .string()
+      .trim()
+      .min(3, { message: 'min 3 characters' })
+      .refine((username) => !/\s/.test(username), {
+        message: 'Username must not contain spaces',
+      }),
+    email: z.string().email('Invalid email format'),
+    password: z.string().min(8, 'Password must be at least 8 characters long'),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ['confirmPassword'], // path of error
+  });
 
 const RegisterPage = () => {
   const form = useForm({
     defaultValues: {
+      username: '',
       email: '',
       password: '',
+      confirmPassword: '',
     },
     resolver: zodResolver(RegisterFromSchema),
     reValidateMode: 'onChange',
   });
 
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleRegister = async (values: RegisterForm) => {
-    const response = await axiosInstance.get('/users', {
-      params: {
-        email: values.email,
-        password: values.password,
-      },
-    });
-    if (!response.data.length) {
-      alert('Invalid email or password');
-      return;
-    }
-    alert('Register success');
+    try {
+      await dispatch(
+        registerUser({
+          username: values.username,
+          email: values.email,
+          password: values.password,
+        })
+      ).unwrap();
 
-    form.reset();
-    window.localStorage.setItem('user-token', response.data[0].id);
+      alert('Registration successful!');
+      navigate('/login');
+    } catch (error) {
+      alert(error || 'Registration failed');
+    }
   };
 
   return (
@@ -65,6 +86,19 @@ const RegisterPage = () => {
               <CardTitle>Register!</CardTitle>
             </CardHeader>
             <CardContent className="flex flex-col gap-2">
+              <FormField
+                control={form.control}
+                name="username"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Username</FormLabel>
+                    <FormControl>
+                      <Input placeholder="username" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <FormField
                 control={form.control}
                 name="email"
@@ -85,29 +119,51 @@ const RegisterPage = () => {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="password"
-                        {...field}
-                        type={showPassword ? 'text' : 'password'}
-                      />
+                      <div className="relative">
+                        <Input
+                          placeholder="password"
+                          {...field}
+                          type={showPassword ? 'text' : 'password'}
+                        />
+                        <Checkbox
+                          onCheckedChange={(checked: boolean) => setShowPassword(Boolean(checked))}
+                          className="absolute right-4 top-4 z-10 cursor-pointer text-gray-500"
+                        />
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <div className="flex items-center space-x-2">
-                <Checkbox
-                  id="show-password"
-                  onCheckedChange={(checked) => setShowPassword(Boolean(checked))}
-                />
-                <Label htmlFor="show-password">Show Password</Label>
-              </div>
+              <FormField
+                control={form.control}
+                name="confirmPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Confirm Password</FormLabel>
+                    <FormControl className="relative">
+                      <div className="relative">
+                        <Input
+                          placeholder="confirm"
+                          {...field}
+                          type={showConfirm ? 'text' : 'password'}
+                        ></Input>
+                        <Checkbox
+                          onCheckedChange={(checked: boolean) => setShowConfirm(Boolean(checked))}
+                          className="absolute right-4 top-4 z-10 cursor-pointer text-gray-500"
+                        />
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </CardContent>
             <CardFooter>
               <div className="flex flex-col space-y-4 w-full">
-                <Button type="submit">Sign in</Button>
+                <Button type="submit">Sign up</Button>
                 <Button variant={'link'} className="w-full">
-                  Sign Up instead
+                  Sign in instead
                 </Button>
               </div>
             </CardFooter>
