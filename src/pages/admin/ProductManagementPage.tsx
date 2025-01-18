@@ -59,8 +59,6 @@ const ProductManagementPage = () => {
   };
 
   const handleDeleteProduct = async () => {
-    console.log('oy');
-
     const shouldDelete = confirm('Are you sure you want to delete this product?');
 
     if (!shouldDelete) {

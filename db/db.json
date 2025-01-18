@@ -136,25 +136,25 @@
       "role": "admin"
     },
     {
-      "id": "2",
-      "username": "user",
+      "id": "azR-8xtu47XCiJQHfLSLC",
+      "username": "user1",
       "email": "user@gmail.com",
-      "password": "user1234",
-      "role": "user"
-    },
-    {
-      "id": "9iEggii2x3pW3Gj-2NNWh",
-      "username": "yasir",
-      "email": "yasirmaarif26@gmail.com",
       "password": "yasir123",
       "role": "user"
+    }
+  ],
+  "cart": [
+    {
+      "id": "1",
+      "userId": "azR-8xtu47XCiJQHfLSLC",
+      "productId": "2",
+      "quantity": 1
     },
     {
-      "id": "MADzFqSCm2-5DVC-twrNP",
-      "username": "ayam",
-      "email": "ayam@gmail.com",
-      "password": "yasir123",
-      "role": "user"
+      "id": "2",
+      "userId": "azR-8xtu47XCiJQHfLSLC",
+      "productId": "3",
+      "quantity": 1
     }
   ]
 }

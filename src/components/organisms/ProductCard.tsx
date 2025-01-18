@@ -2,20 +2,9 @@ import { useState } from 'react';
 import { Button } from '../ui/button';
 import { IoIosAdd, IoIosRemove } from 'react-icons/io';
 import { Link } from 'react-router-dom';
+import { Product } from '@/types/product-type';
 
-export const ProductCard = ({
-  id,
-  name,
-  price,
-  stock,
-  imageUrl,
-}: {
-  id: number;
-  name: string;
-  price: number;
-  stock: number;
-  imageUrl: string;
-}) => {
+export const ProductCard = ({ id, name, price, stock, imageUrl }: Product) => {
   const [quantity, setQuantity] = useState(0);
 
   const handleIncrement = () => {

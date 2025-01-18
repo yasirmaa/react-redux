@@ -1,52 +1,29 @@
 import { DetailProductSkeleton } from '@/components/organisms/Skeleton';
 import { Button } from '@/components/ui/button';
-import { axiosInstance } from '@/lib/axios';
-import { useEffect, useState } from 'react';
+import { useAppSelector } from '@/store/hooksStore';
+import { selectProductById, selectProductStatus } from '@/store/productSlice';
+import { useState } from 'react';
 import { IoIosAdd, IoIosRemove } from 'react-icons/io';
 import { IoHeartOutline } from 'react-icons/io5';
 import { useParams } from 'react-router-dom';
 
-type Product = {
-  id: number;
-  name: string;
-  price: number;
-  stock: number;
-  imageUrl: string;
-};
-
 const ProductDetailpage = () => {
   const params = useParams();
-  const [product, setProduct] = useState<Product>({
-    id: 0,
-    name: '',
-    price: 0,
-    stock: 0,
-    imageUrl: '',
-  });
+  const product = useAppSelector((state) => selectProductById(state, params.productId!));
+  const status = useAppSelector(selectProductStatus);
   const [quantity, setQuantity] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
 
-  const fetchProduct = async () => {
-    try {
-      setIsLoading(true);
-      const response = await axiosInstance.get(`/products/${params.productId}`);
-      console.log(response.data);
-
-      setProduct(response.data);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchProduct();
-  }, []);
+  if (product === undefined) {
+    return (
+      <main className="min-h-screen max-w-screen-lg mx-auto grid grid-cols-12 gap-8 items-center">
+        <h1 className="text-4xl font-bold col-span-12 text-center">Product not found</h1>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen max-w-screen-lg mx-auto grid grid-cols-12 gap-8 items-center">
-      {isLoading ? (
+      {status === 'loading' ? (
         <DetailProductSkeleton />
       ) : (
         <>
@@ -74,7 +51,9 @@ const ProductDetailpage = () => {
               </Button>
             </div>
             <div className="w-full flex">
-              <Button className="w-11/12">Add to Cart</Button>
+              <Button disabled={product.stock <= 0} className="w-11/12">
+                Add to Cart
+              </Button>
               <Button variant={'ghost'} size={'icon'} className="w-1/12">
                 <IoHeartOutline className="h-6 w-6" />
               </Button>

@@ -40,7 +40,7 @@ const RegisterFromSchema = z
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",
-    path: ['confirmPassword'], // path of error
+    path: ['confirmPassword'],
   });
 
 const RegisterPage = () => {
@@ -69,7 +69,6 @@ const RegisterPage = () => {
           password: values.password,
         })
       ).unwrap();
-
       alert('Registration successful!');
       navigate('/login');
     } catch (error) {

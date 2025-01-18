@@ -1,19 +1,25 @@
 import { ProductCard } from '@/components/organisms/ProductCard';
 import { ProductSkeleton } from '@/components/organisms/Skeleton';
-import { axiosInstance } from '@/lib/axios';
-import { useEffect, useState } from 'react';
-
-type Product = {
-  id: number;
-  name: string;
-  price: number;
-  stock: number;
-  imageUrl: string;
-};
+import { useAppDispatch, useAppSelector } from '@/store/hooksStore';
+import {
+  fetchProducts,
+  selectAllProducts,
+  selectProductError,
+  selectProductStatus,
+} from '@/store/productSlice';
+import { useEffect } from 'react';
 
 const HomePage = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const products = useAppSelector(selectAllProducts);
+  const status = useAppSelector(selectProductStatus);
+  const error = useAppSelector(selectProductError);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (status === 'idle') {
+      dispatch(fetchProducts());
+    }
+  }, [status, dispatch]);
 
   const ProductList = products.map((product) => (
     <ProductCard
@@ -26,22 +32,13 @@ const HomePage = () => {
     />
   ));
 
-  const fetchProducts = async () => {
-    setIsLoading(true);
-    try {
-      const response = await axiosInstance.get('/products');
-
-      setProducts(response.data);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
+  if (status === 'failed') {
+    return (
+      <main className="min-h-screen max-w-screen-lg mx-auto grid grid-cols-12 gap-8 items-center">
+        <h1 className="text-4xl font-bold col-span-12 text-center">An error occured: {error}</h1>
+      </main>
+    );
+  }
 
   return (
     <>
@@ -57,7 +54,7 @@ const HomePage = () => {
         </div>
 
         <div className="grid grid-cols-4 gap-3">
-          {isLoading ? (
+          {status === 'loading' ? (
             <>
               <ProductSkeleton />
               <ProductSkeleton />
