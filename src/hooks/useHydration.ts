@@ -1,5 +1,6 @@
 import { axiosInstance } from '@/lib/axios';
 import { useAppDispatch } from '@/store/hooksStore';
+import { fetchProducts } from '@/store/productSlice';
 import { loginUser } from '@/store/userSlice';
 import { useEffect, useState } from 'react';
 
@@ -9,6 +10,7 @@ export const useHydration = () => {
 
   const hydrateAuth = async () => {
     try {
+      dispatch(fetchProducts());
       const currentUser = localStorage.getItem('user-token');
 
       if (!currentUser) return;
