@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSelector, createSlice, nanoid } from '@reduxjs/toolkit';
 import { RootState } from './store';
 import axios from 'axios';
 import { axiosInstance } from '@/lib/axios';
@@ -45,6 +45,65 @@ export const fetchCartByUserId = createAsyncThunk(
         },
       });
       return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.message) {
+        return thunkAPI.rejectWithValue(error.message);
+      } else {
+        return thunkAPI.rejectWithValue('An unknown error occurred');
+      }
+    }
+  }
+);
+
+export const addToCart = createAsyncThunk(
+  'cart/addToCart',
+  async (
+    {
+      userId,
+      productId,
+      quantity,
+    }: {
+      userId: string;
+      productId: string;
+      quantity: number;
+    },
+    thunkAPI
+  ) => {
+    try {
+      const productExists = await axiosInstance.get('/cart', {
+        params: {
+          userId,
+          productId,
+        },
+      });
+      if (productExists.data.length > 0) {
+        const response = await axiosInstance.patch(`/cart/${productExists.data[0].id}`, {
+          quantity: productExists.data[0].quantity + quantity,
+        });
+        return response.data;
+      }
+      const response = await axiosInstance.post('/cart', {
+        id: nanoid(),
+        userId,
+        productId,
+        quantity,
+      });
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.message) {
+        return thunkAPI.rejectWithValue(error.message);
+      } else {
+        return thunkAPI.rejectWithValue('An unknown error occurred');
+      }
+    }
+  }
+);
+
+export const deleteCartItem = createAsyncThunk(
+  'cart/deleteCartItem',
+  async (cartId: string, thunkAPI) => {
+    try {
+      await axiosInstance.delete(`/cart/${cartId}`);
     } catch (error) {
       if (axios.isAxiosError(error) && error.message) {
         return thunkAPI.rejectWithValue(error.message);

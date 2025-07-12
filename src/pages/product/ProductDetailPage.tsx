@@ -33,7 +33,7 @@ const ProductDetailpage = () => {
           <div className="col-span-6 space-y-4">
             <h1 className="text-4xl font-bold">{product.name}</h1>
             <p className="text-2xl font-bold">Rp {product.price.toLocaleString('id-ID')}</p>
-            <p className="text-muted-foreground">
+            <p className="text-slate-500">
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit obcaecati placeat
               commodi ea, blanditiis qui sint voluptates, provident soluta enim nisi nulla excepturi
               ipsum, harum reiciendis sunt ratione assumenda cumque!

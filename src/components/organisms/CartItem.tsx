@@ -1,14 +1,27 @@
 import { IoIosAdd, IoIosRemove } from 'react-icons/io';
 import { Button } from '../ui/button';
 import { IoCheckmark } from 'react-icons/io5';
+import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '@/store/hooksStore';
+import { deleteCartItem, fetchCartByUserId } from '@/store/cartSlice';
 
-type Product = {
+type CartProps = {
+  cartId: string;
   name: string;
   price: number;
   imageUrl: string;
+  quantity: number;
 };
 
-export const CartItem = ({ imageUrl, name, price }: Product) => {
+export const CartItem = ({ cartId, imageUrl, name, price, quantity }: CartProps) => {
+  const [quantityState, setQuantityState] = useState(quantity);
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.user);
+  const handleRemoveItem = async () => {
+    await dispatch(deleteCartItem(cartId));
+    dispatch(fetchCartByUserId(user.id));
+  };
+
   return (
     <div className="flex gap-4">
       <div className="aspect-square w-full overflow-hidden rounded-md max-w-52">
@@ -22,11 +35,11 @@ export const CartItem = ({ imageUrl, name, price }: Product) => {
         </div>
 
         <div className="flex items-center gap-3">
-          <Button>
+          <Button onClick={() => setQuantityState(quantityState - 1)} disabled={quantityState <= 1}>
             <IoIosRemove className="w-4 h-4"></IoIosRemove>
           </Button>
-          <p className="text-lg font-bold">1</p>
-          <Button>
+          <p className="text-lg font-bold">{quantityState}</p>
+          <Button onClick={() => setQuantityState(quantityState + 1)}>
             <IoIosAdd className="w-4 h-4"></IoIosAdd>
           </Button>
         </div>
@@ -37,7 +50,7 @@ export const CartItem = ({ imageUrl, name, price }: Product) => {
             <span>Available</span>
           </div>
 
-          <Button className="text-destructive" variant={'link'}>
+          <Button className="text-destructive" variant={'link'} onClick={handleRemoveItem}>
             Remove Item
           </Button>
         </div>

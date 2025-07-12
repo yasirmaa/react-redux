@@ -3,9 +3,14 @@ import { Button } from '../ui/button';
 import { IoIosAdd, IoIosRemove } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 import { Product } from '@/types/product-type';
+import { useAppDispatch, useAppSelector } from '@/store/hooksStore';
+import { addToCart, fetchCartByUserId } from '@/store/cartSlice';
+import { selectUser } from '@/store/userSlice';
 
 export const ProductCard = ({ id, name, price, stock, imageUrl }: Product) => {
   const [quantity, setQuantity] = useState(0);
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(selectUser);
 
   const handleIncrement = () => {
     if (quantity < stock) {
@@ -19,7 +24,21 @@ export const ProductCard = ({ id, name, price, stock, imageUrl }: Product) => {
     }
   };
 
-  const addToCart = () => {};
+  const handleAddToCart = async () => {
+    if (quantity === 0) {
+      alert('Please input quantity');
+      return;
+    }
+    try {
+      await dispatch(addToCart({ userId: user.id, productId: id, quantity })).unwrap();
+      alert('Added to cart successfully');
+      dispatch(fetchCartByUserId(user.id));
+    } catch (error) {
+      console.log('Failed to add to cart:', error);
+    } finally {
+      setQuantity(0);
+    }
+  };
 
   return (
     <div className="p-4 border rounded-md md:max-w-80 flex flex-col gap-4">
@@ -56,7 +75,7 @@ export const ProductCard = ({ id, name, price, stock, imageUrl }: Product) => {
           </Button>
         </div>
 
-        <Button disabled={!stock} className="w-full" onClick={addToCart}>
+        <Button disabled={!stock} className="w-full" onClick={handleAddToCart}>
           {stock ? 'Add to cart' : 'Out of stock'}
         </Button>
       </div>

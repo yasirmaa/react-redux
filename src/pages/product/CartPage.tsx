@@ -14,8 +14,6 @@ const CartPage = () => {
   const [error, setError] = useState<string | null>(null);
 
   const fetchProducts = async () => {
-    console.log(cartItems);
-
     try {
       setLoading(true);
       setError(null);
@@ -52,14 +50,15 @@ const CartPage = () => {
           <div className="col-span-7 gap-6 flex flex-col">
             {loading && <p>Loading...</p>}
             {error && <p className="text-red-500">{error}</p>}
-            {!loading &&
-              !error &&
-              products.map((product) => (
+            {products.length > 0 &&
+              products.map((product, i) => (
                 <CartItem
                   key={product.id}
+                  cartId={cartItems[i].id}
                   name={product.name}
                   price={product.price}
                   imageUrl={product.imageUrl}
+                  quantity={cartItems[i].quantity}
                 />
               ))}
           </div>

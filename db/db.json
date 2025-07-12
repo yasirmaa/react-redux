@@ -143,12 +143,5 @@
       "role": "user"
     }
   ],
-  "cart": [
-    {
-      "id": "1",
-      "userId": "azR-8xtu47XCiJQHfLSLC",
-      "productId": "2",
-      "quantity": 1
-    }
-  ]
+  "cart": []
 }
